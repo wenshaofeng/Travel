@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
       <swiper-slide  v-for="(page,index) of pages"
 
       >
@@ -27,62 +27,16 @@
   export default{
     components: {SwiperSlide},
     name:'icons',
-    data (){
-      return {
-        iconList : [
-          {
-           id:'0001',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png",
-            desc:"景点门票哈哈哈哈哈哈"
-          },
-          {
-            id:'0002',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/3e/86314b2af03b7502.png",
-            desc:"水上乐园"
-          },
-          {
-            id:'0003',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png",
-            desc:"游乐场"
-          },
-          {
-            id:'0004',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png",
-            desc:"海洋馆"
-          },
-          {
-            id:'0005',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png",
-            desc:"动植物园"
-          },
-          {
-            id:'0006',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/b1/528a9e80403b8c02.png",
-            desc:"玩转长隆"
-          },
-          {
-            id:'0007',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/b6/37560ece9c62b502.png",
-            desc:"城市观光"
-          },
-          {
-            id:'0008',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png",
-            desc:"海洋馆"
-          },
-          {
-            id:'0009',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png",
-            desc:"海洋馆"
-          },
-          {
-            id:'0010',
-            imgUrl:"http://img1.qunarzz.com/piao/fusion/1803/b6/37560ece9c62b502.png",
-            desc:"城市观光"
-          }
-        ]
-      }
-    },
+      props:{
+        iconList : Array
+      },
+      data () {
+        return {
+            swiperOption:{
+                autoplay:false
+            }
+        }
+      },
     computed: {
       pages () {
         const pages = []

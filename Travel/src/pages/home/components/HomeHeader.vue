@@ -6,9 +6,12 @@
       <div class="header-input">
         <span class="iconfont">&#xe632;</span>
         请输入城市/景点/游玩主题</div>
-       <div class="header-right">{{this.city}}
-       <span class="iconfont city"> &#xe62d;</span>
+    <router-link to="/city">
+        <div class="header-right">{{this.city}}
+         <span class="iconfont city"> &#xe62d;</span>
         </div>
+    </router-link>
+
    </div>
 
 </template>
@@ -37,8 +40,8 @@
         float left
         .back
           text-align  center
-          font-size .4rem
-          margin-left .2rem
+          font-size .3rem
+          margin-left .3rem
       .header-input
           flex 1
           background :#fff
@@ -52,8 +55,9 @@
         width 1.24rem
         float right
         text-align center
+        color :#fff
         .city
-          font-size .1rem
+          font-size .18rem
 
 
 </style>

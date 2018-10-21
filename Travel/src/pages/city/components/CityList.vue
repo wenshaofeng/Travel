@@ -1,0 +1,151 @@
+<template>
+    <div class="list" ref="wrapper">
+      <div>
+        <div class="area1">
+          <nav class="title border-topbottom">我的位置</nav>
+          <div class="button-list">
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+          </div>
+        </div>
+        <div class="area2">
+          <nav class="title border-topbottom">热门城市</nav>
+          <div class="button-list">
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+            <div class="button-wrapper">
+              <div class="button">深圳</div>
+            </div>
+          </div>
+        </div>
+        <div class="area3">
+          <nav class="title border-topbottom">A</nav>
+          <div class="item-list">
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+          </div>
+          <nav class="title border-topbottom">B</nav>
+          <div class="item-list">
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+          </div>
+          <nav class="title border-topbottom">C</nav>
+          <div class="item-list">
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+          </div>
+          <nav class="title border-topbottom">D</nav>
+          <div class="item-list">
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+            <div class="item border-bottom">南山区 </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</template>
+
+
+<script>
+  import BScroll from 'better-scroll'
+    export default{
+         name: 'CityList',
+      mounted () {
+             this.scroll = new BScroll(this.$refs.wrapper)
+      }
+    }
+</script>
+
+<style lang='stylus' rel='stylesheet/stylus' scoped>
+  .border-bottom
+    &:before
+      border-color #ccc
+  .border-topbottom
+    &:before
+      border-color #ccc
+    &:after
+      border-color #ccc
+  .list
+    position absolute
+    top 1.59rem
+    right 0
+    bottom 0
+    left 0
+    overflow hidden
+    .title
+      line-height .54rem
+      background #eee
+      padding-left .2rem
+      color #666
+      font-size .26rem
+    .button-list
+      padding 0.1rem 0.6rem 0.1rem 0.1rem
+      overflow hidden
+      .button-wrapper
+        float left
+        width 33.33%
+        .button
+          margin .1rem
+          padding 0.1rem  0
+          border-radius 0.06rem
+          text-align center
+          border .02rem solid #ccc
+    .item-list
+      .item
+        padding-left .2rem
+        line-height .76rem
+        color #666
+</style>

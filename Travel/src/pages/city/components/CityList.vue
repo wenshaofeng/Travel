@@ -11,90 +11,25 @@
         </div>
         <div class="area2">
           <nav class="title border-topbottom">热门城市</nav>
-          <div class="button-list">
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
-            </div>
-            <div class="button-wrapper">
-              <div class="button">深圳</div>
+          <div class="button-list" >
+
+            <div class="button-wrapper" v-for="part of hotCities"
+                 :key = "part.id">
+              <div class="button">{{part.name}}</div>
             </div>
           </div>
         </div>
-        <div class="area3">
-          <nav class="title border-topbottom">A</nav>
-          <div class="item-list">
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-          </div>
-          <nav class="title border-topbottom">B</nav>
-          <div class="item-list">
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-          </div>
-          <nav class="title border-topbottom">C</nav>
-          <div class="item-list">
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-          </div>
-          <nav class="title border-topbottom">D</nav>
-          <div class="item-list">
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
-            <div class="item border-bottom">南山区 </div>
+        <div class="area3" v-for="(item , key) of cities" :key="key"
+        >
+          <nav class="title border-topbottom">{{key}}</nav>
+          <div class="item-list"  v-for="(smallItem , key) of item "
+               :key="smallItem.id">
+            <div class="item border-bottom">
+              {{smallItem.name}}
+            </div>
           </div>
         </div>
       </div>
-
     </div>
 </template>
 
@@ -103,8 +38,12 @@
   import BScroll from 'better-scroll'
     export default{
          name: 'CityList',
+        props: {
+          hotCities :Array,
+          cities: Object
+        },
       mounted () {
-             this.scroll = new BScroll(this.$refs.wrapper)
+             const scroll = new BScroll(this.$refs.wrapper)
       }
     }
 </script>

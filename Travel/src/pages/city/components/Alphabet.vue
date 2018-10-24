@@ -19,20 +19,26 @@
         props: {
           cities : Object
         },
+      computed :{
+        letters(){
+          const letters = []
+          for (let i in this.cities) {
+            letters.push(i)
+          }
+          return letters
+        }
+      },
         data () {
             return{
-                touchStatus : false
+                touchStatus : false,
+                startY:0,
+                timer:null
             }
         },
-        computed :{
-            letters(){
-              const letters = []
-              for (let i in this.cities) {
-                  letters.push(i)
-              }
-              return letters
-            }
+        updated () {
+            this.startY = this.$refs['A'][0].offsetTop
         },
+
       methods:{
         handleLetterClick: function (e) {
           this.$emit("change",e.target.innerText);
@@ -41,14 +47,18 @@
           this.touchStatus =true
         },
         handleTouchMove:function (e) {
-          if(this.touchStatus === true){
-              const startY = this.$refs['A'][0].offsetTop
-              const touchY = e.touches[0].clientY - 79
-              const index = Math.floor((touchY - startY)/20)
-            if(index >= 0 && index < this.letters.length)
-            {
-              this.$emit('change',this.letters[index])
-            }
+          if(this.touchStatus){
+              if(this.timer){
+                  clearTimeout(this,timer)
+              }
+              this.timer = setTimeout(()=>{
+                const touchY = e.touches[0].clientY - 79
+                const index = Math.floor((touchY - this.startY)/20)
+                if(index >= 0 && index < this.letters.length)
+                {
+                  this.$emit('change',this.letters[index])
+                }
+              },16)
           }
         },
         handleTouchEnd: function () {

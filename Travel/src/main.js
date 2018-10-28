@@ -9,6 +9,7 @@ import fastClick from 'fastclick'
 import 'styles/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import store from './store/index.js'
 
 Vue.config.productionTip = false;
 fastClick.attach(document.body);
@@ -17,6 +18,7 @@ Vue.use(VueAwesomeSwiper)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App }, // 相当于 {App（局部组件）:App} ES6写法
   template: '<App/>'
 })

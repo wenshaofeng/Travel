@@ -7,7 +7,7 @@
         <span class="iconfont">&#xe632;</span>
         请输入城市/景点/游玩主题</div>
     <router-link to="/city">
-        <div class="header-right">{{this.doubleCity}}
+        <div class="header-right">{{this.city}}
          <span class="iconfont city"> &#xe62d;</span>
         </div>
     </router-link>
@@ -18,12 +18,11 @@
 
 <script>
   //export default 指的是导出，意思是定一个一个组件，然后把组件导出出去
-import {mapState ,mapGetters} from 'vuex'
+import {mapState} from 'vuex'
   export default{
     name:'HomeHeader',
     computed :{
       ...mapState(['city']),
-        ...mapGetters(['doubleCity'])
     }
   }
 </script>

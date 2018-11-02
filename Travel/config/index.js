@@ -11,10 +11,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "/api":{
+      "/api":{  //向api发送请求时，会将路径切换到http://localhost:8080
         target:'http://localhost:8080',
           pathRewrite:{
-          '^/api':'/static/mock'
+          '^/api':'/static/mock'  //会将以 '/api'开头的地址映射到/static/mock
           }
       }
     },

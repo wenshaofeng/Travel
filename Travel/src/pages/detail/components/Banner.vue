@@ -28,7 +28,7 @@
     data () {
       return {
         imgs : ['http://img1.qunarzz.com/sight/p0/1412/42/ab493fd01bc3d2b2b0874fe0b0ae5540.water.jpg_r_800x800_b0342038.jpg','http://img1.qunarzz.com/sight/p0/1412/b5/c99be07b7b79cfb5900e03a35bc3051f.water.jpg_r_800x800_454faea8.jpg',
-          'http://img1.qunarzz.com/sight/p0/1412/4b/632fe62f622b9b112cdf9f3b80ce8f78.water.jpg_r_800x800_a387b255.jpg'],
+          'http://img1.qunarzz.com/sight/p0/1412/4b/632fe62f622b9b112cdf9f3b80ce8f78.water.jpg_r_800x800_a387b255.jpg','http://img1.qunarzz.com/sight/p0/1503/96/96334094d01ce355.water.jpg_r_800x800_d296438f.jpg'],
         showGallary :false
       }
     },

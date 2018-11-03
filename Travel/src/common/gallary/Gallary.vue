@@ -18,7 +18,7 @@
     props: {
       imgs : {
         type : Array,
-        default () {
+        default () {   //默认值
           return []
         }
       }
@@ -32,7 +32,7 @@
       return {
         swiperOption: {
           pagination : '.swiper-pagination',
-          paginationType : 'fraction',
+          paginationType : 'fraction', //分页器样式类型
           autoplay:false,
           observeParents : true ,
           observer : true
@@ -43,6 +43,9 @@
 </script>
 
 <style lang='stylus' rel='stylesheet/stylus' scoped>
+  .container >>> .swiper-wrapper
+    display flex
+    align-items center
   .container >>> .swiper-container
     overflow inherit
   .container
@@ -58,8 +61,6 @@
     background #000
     .wrapper
       width 100%
-      height 0
-      padding-bottom 60%
       .swiper-img
         width 100%
       .swiper-pagination

@@ -1,8 +1,11 @@
 <template>
     <div>
-      <detail-banner> </detail-banner>
+      <detail-banner :sightName="sightName"
+                     :bannerImg="bannerImg"
+                     :gallary="gallaryImgs">
+      </detail-banner>
       <detail-header> </detail-header>
-      <detail-list :list="list"></detail-list>
+      <detail-list :list="categoryList"></detail-list>
       <div class="box"></div>
     </div>
 </template>
@@ -12,6 +15,7 @@
   import DetailBanner from "./components/Banner.vue"
   import DetailHeader from "./components/Header.vue"
   import DetailList from "./components/List.vue"
+  import axios from 'axios'
   export default{
     name: 'Detail'     ,
     props: {},
@@ -20,46 +24,40 @@
       DetailHeader,
       DetailList
     },
+    methods:{
+      getDetailInfo () {
+        axios.get('/api/detail.json?id='+this.$route.params.id).then(this.getDetaiInfoSucc)
+      },
+      getDetaiInfoSucc (res) {
+        res = res.data
+        if (res.ret && res.data) {
+          const data = res.data
+          this.sightName = data.sightName
+          this.bannerImg = data.bannerImg
+          this.gallaryImgs = data.gallaryImgs
+          this.categoryList = data.categoryList
+        }
+      }
+    },
     data (){
       return{
-        list : [
-          {
-            title : '成人票',
-            children:[
-              { title :'成人三馆联票',
-                children:[
-                  {
-                    title:'成人三馆联票——特惠一'
-                  },   {
-                    title:'成人三馆联票——特惠二'
-                  }
+        sightName : '',
+        bannerImg : '',
+        gallaryImgs : [],
+        categoryList : [],
+        LastId : ''
 
-                ]
-              },
-              { title :'成人五馆联票'}
-              ]
-
-          },{
-            title : '优惠人群票',
-            children:[
-              { title :'成人三馆联票',
-                children:[
-                  {
-                    title:'成人三馆联票——特惠一'
-                  },   {
-                    title:'成人三馆联票——特惠二'
-                  }
-
-                ]
-              },
-              { title :'成人五馆联票'}
-            ]
-          },{
-            title : '团队票'
-          },{
-            title : '一日游'
-          }
-        ]
+      }
+    },
+    mounted (){
+      this.LastId = this.$route.params.id
+      this.getDetailInfo ()
+    },
+    activated () {
+      if (this.LastId !== this.$route.params.id)
+      {
+        this.LastId = this.$route.params.id
+        this.getDetailInfo()
       }
     }
   }

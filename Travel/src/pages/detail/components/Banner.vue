@@ -2,16 +2,17 @@
   <div>
     <div class="banner" @click="handleClick">
       <img class="banner-img"
-           src="//img1.qunarzz.com/sight/p0/1810/22/226c137568f18ac0a3.water.jpg_600x330_554b60a8.jpg" alt="">
+           :src='bannerImg'
+            alt="">
       <div class="banner-info">
-        <div class="banner-title"> 深圳欢乐谷(AAAAA景区)</div>
+        <div class="banner-title"> {{this.sightName}}</div>
       </div>
       <div class="banner-number">
         <span class="iconfont banner-icon"> &#xe796; </span>
-        52
+        {{this.gallary.length}}
       </div>
     </div>
-    <common-gallary @cancel="handleClick" :imgs="imgs" v-show="showGallary"></common-gallary>
+    <common-gallary @cancel="handleClick" :imgs="gallary" v-show="showGallary"></common-gallary>
   </div>
 
 </template>
@@ -20,15 +21,17 @@
 <script>
   import CommonGallary from 'common/gallary/Gallary.vue'
   export default{
-    name:'DetailBanner',
-    components:{
+    name: 'DetailBanner',
+    components: {
       CommonGallary
     },
-    props: [],
+    props: {
+    sightName: String,
+    bannerImg: String,
+     gallary:Array
+  },
     data () {
       return {
-        imgs : ['http://img1.qunarzz.com/sight/p0/1412/42/ab493fd01bc3d2b2b0874fe0b0ae5540.water.jpg_r_800x800_b0342038.jpg','http://img1.qunarzz.com/sight/p0/1412/b5/c99be07b7b79cfb5900e03a35bc3051f.water.jpg_r_800x800_454faea8.jpg',
-          'http://img1.qunarzz.com/sight/p0/1412/4b/632fe62f622b9b112cdf9f3b80ce8f78.water.jpg_r_800x800_a387b255.jpg','http://img1.qunarzz.com/sight/p0/1503/96/96334094d01ce355.water.jpg_r_800x800_d296438f.jpg'],
         showGallary :false
       }
     },

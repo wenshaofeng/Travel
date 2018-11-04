@@ -37,7 +37,6 @@
     },
     methods : {
       handleScroll : function () {
-        console.log(111)
         const top = document.documentElement.scrollTop
         if (top > 35 ){
           const opacity = top/170
@@ -72,7 +71,7 @@
     .back
       color #fff
   .header-fixed
-    z-index 2
+    z-index 4
     top 0
     left 0
     right 0

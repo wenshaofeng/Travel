@@ -11,8 +11,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import store from './store/index.js'
 
-Vue.config.productionTip = false;
-fastClick.attach(document.body);
+Vue.config.productionTip = false
+fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 /* eslint-disable no-new */
 new Vue({

@@ -52,7 +52,7 @@
     display flex
     flex-direction column
     justify-content center
-    z-index 2
+    z-index 6
     position fixed
     left 0
     right 0

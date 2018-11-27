@@ -26,7 +26,8 @@
     },
     methods:{
       getDetailInfo () {
-        axios.get('/api/detail.json?id='+this.$route.params.id).then(this.getDetaiInfoSucc)
+        axios.get('/api/detail.json?id='+this.$route.params.id)
+          .then(this.getDetaiInfoSucc)
       },
       getDetaiInfoSucc (res) {
         res = res.data

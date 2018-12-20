@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!--**** 第一部分 ****-->
+    <!--input中的v-model 双向绑定数据-->
+    <!--vue:实例 el:实例接管标签 data:接管数据 $data :data 对象-->
+    <!--v-on:click 简写@click ,方法放在 methods 里-->
+    <!--v-for="item of list" {{item}} 插值表达式-->
+
+<!--***************************************************************************-->
+
+    <div id="app">
+        <input type="text" v-model="inputValue"/>
+        <button v-on:click="handleSubmit">提交</button>
+        <ul>
+            <li v-for="item of list">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                content:"hello world",
+                inputValue:"",
+                list:[]
+            },
+            methods:{
+                handleSubmit:function () {
+                    this.list.push(this.inputValue);
+                    this.inputValue ="";
+                }
+            }
+        })
+
+    </script>
+
+<!--**** 第二部分 组件化 ****-->
+    <!--
+    父组件的数据通过 props :[] 来向子组件传递，每一次list里的item通过v-bind 向子组件传递，
+        子组件通过props 接收。
+    template 模板里要用插值表达式{{}} 会替换掉组件的内容
+    局部组件需要注册
+    -->
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <button @click="submit">提交</button>
+        <ul>
+            <todo-item  :content = "item"
+                        v-for="item in list">
+            </todo-item>
+        </ul>
+    </div>
+
+    <script>
+         /*全局组件*/
+    /*    Vue.component("todo-item",{
+            props:['content'],
+           template: "<li> {{content}}</li>"
+        });*/
+
+        var TodoItem ={
+            props:['content'],
+            template: "<li> {{content}}</li>"
+        };
+        var app = new Vue({
+            el:"#app",
+            data:{
+                inputValue:"",
+                list : []
+            },
+            components:{
+                TodoItem:TodoItem
+            },
+            methods:{
+                submit:function () {
+                        this.list.push(this.inputValue);
+                        this.inputValue="";
+                }
+            }
+
+        })
+
+    </script>
+</body>
+</html>

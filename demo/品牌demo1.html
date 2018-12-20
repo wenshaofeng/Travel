@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    <div id="app">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    Id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+
+                <label>
+                    Name:
+                    <input type="text" class="form-control" v-model="name">
+                </label>
+
+                <!-- 在Vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
+                <input type="button" value="添加" class="btn btn-primary" @click="add">
+
+                <label>
+                    搜索名称关键字：
+                    <input type="text" class="form-control" v-model="keywords">
+                </label>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Ctime</th>
+                <th>Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keywords)"
+                    :key="item.id"
+                >
+                    <td>{{item.id}}</td>
+                    <td v-text="item.name"></td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href=""@click.prevent="del(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        var vm = new Vue({
+          el:"#app",
+          data:{
+            id : '',
+            name : '',
+            keywords:'',
+            list:[
+              { id: 1, name: '奔驰', ctime: new Date().toLocaleTimeString() },
+              { id: 2, name: '宝马', ctime: new Date().toLocaleTimeString() }
+            ]
+          },
+          mounted () {
+            this.getInfo () 
+          },
+          methods:{
+            add (){
+                var newItem = {
+                  id:this.id ,
+                  name : this.name,
+                  ctime :new Date().toLocaleTimeString()
+                }
+                this.$http.post('http://www.liulongbin.top:3005/api/addproduct',{id:this.id,name:this.name})
+                .then((result) => {
+                        if(result.status === 200){
+                            this.getInfo()
+                            this.name = ''
+                        }
+                       
+                
+                    
+                }).catch((err) => {
+                    
+                });
+               /*  this.list.push(newItem)
+                this.id=this.name = '' */
+            },
+            del (id)  {
+                this.$http.get('http://www.liulongbin.top:3005/api/delproduct/'+id).then((result) => {
+                    if(result.status == 200) {
+                        console.log(111);
+                        this.getInfo()
+                    }
+                }).catch((err) => {
+                    
+                });
+             /*   this.list.some((item,i) => {
+                 if(item.id == id){
+                this.list.splice(i , 1)
+                   return true
+              }
+                }) */
+
+            },
+            search(keywords){
+             return this.list.filter(item=>{
+                    if(item.name.includes(keywords)) {
+                      return item
+              }
+                })
+
+            },
+            getInfo () {
+                this.$http.get('http://www.liulongbin.top:3005/api/getprodlist').then((result) => {
+                   
+                    
+                    if(result.status == 200){
+                        let message = result.data.message
+                       this.list = this.list.slice(0,2)
+                        for(var i = 0; i < message.length; i++){
+                            message[i].ctime = new Date()
+                           
+                            message[i].ctime = message[i].ctime.toLocaleTimeString()
+                            
+                            this.list.push(message[i])
+                            
+                        }
+                    
+                        
+                    }
+                }).catch((err) => {
+                    
+                });
+            }
+          }
+
+        })
+    </script>
+</body>
+</html>

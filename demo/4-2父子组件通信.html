@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子通信</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+        <!--父—>子： 父组件v-bind：变量名=“js表达式” 子组件：props获取
+        **单项数据流** 子组件不能直接修改父组件传递来的参数
+        修改Object的值会导致别的引用了该对象的子组件内数据的变化，
+        用在子组件内复制一份该对象，修改子组件内自己的data来代替
+
+        子->父： 通过事件形式来传递 子组件：this.$emit('事件名',传递的参数);
+        父组件：监听 @事件名="方法名" 方法名（value）{ .... //value=传递来的参数 }-->
+
+<div id="app">
+    <counter @increase="handleTotal" ref="one1" :num="0"></counter>
+    <counter @increase="handleTotal" ref="two2" :num="0"></counter>
+    {{ total }}
+</div>
+
+<script>
+    Vue.component('counter',{
+        template : ' <div><button @click = "addone"> 加一</button> {{ number}}</div>',
+        props:['num'],
+        data:function () {
+            return{
+               number:this.num
+            }
+        },
+        methods:{
+            addone:function () {
+                console.log(this.number);
+                this.number ++;
+                this.$emit("increase");
+            }
+        }
+    })
+
+    var vm =new Vue({
+        el:"#app",
+        data:{
+            total : 0
+        },
+        methods:{
+            handleTotal:function () {
+                this.total =  this.$refs.one1.number + this.$refs.two2.number
+            }
+        }
+        /* methods:{
+         handleClick:function () {
+         console.log(this.$refs.hello.innerHTML)
+         }
+         }*/
+    })
+</script>
+</body>
+</html>

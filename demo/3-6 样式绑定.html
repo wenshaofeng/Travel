@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>样式绑定</title>
+    <style>
+       /* :class=''这里其实是JS表达式。
+                 样式绑定：
+        1、:class='{className: boolean}'，class的对象绑定；
+        2、:class='[varibleName， varibleName2]'，class的数组绑定； 数组中不用''号
+        3、:style='{styleName: value}'，style的对象绑定，和写css没区别；
+        4、:style='[{styleName: value}，{styleName2: value}]'，style的数组绑定
+
+        在Vue对象中，样式的类名要用驼峰写法fontSize，不能用font-size
+        v-bind:style 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。
+        CSS 属性名可以用驼峰式 (camelCase)或短横线分隔 (kebab-case，记得用单引号括起来)
+        来命名
+        */
+
+      .active{
+          color:blue;
+      }
+      .fontSize{
+          font-size: 50px;
+      }
+
+    </style>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="vm">
+       一： class 数组写法
+        <!-- <div :class="[activeCl,fontSizeCl] "
+              @click="DivClick"   >
+            Hello World
+        </div>-->
+        二： style数组写法
+      <div :style="[fontCl,activeCl,{backgroundColor:'red'} ]"
+             @click="DivClick" >
+            Hello World
+        </div>
+    </div>
+
+
+    <script>
+        var vm =new Vue({
+            el: "#vm",
+            data:{
+                activeCl:{
+                        color:"blue"
+                },
+                fontCl:{
+                     fontSize:'40px'
+                }
+            },
+            methods:{
+                DivClick:function () {
+
+                    this.activeCl.color=this.activeCl.color==="blue"?"black":"blue"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

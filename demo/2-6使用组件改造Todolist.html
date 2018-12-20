@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+       <!-- 父组件向子组件传值：
+        1.父组件使用 v-bind 绑定变量并赋值给变量。
+        2.在子组件里使用 props 来接收父组件传递过来的值。
+        子组件向父组件传值：
+        1.子组件通过 $emit() 方法向外派发事件，传递参数。
+        2.父组件通过监听子组件派发的事件来获得参数。
+
+        通过子组件 $emit(delete,this.index)向父组件传值 index
+        父组件取到值以后改变数据
+        -->
+<div id="root">
+    <div>
+        <input type="text" v-model="todoValue"/>
+        <button @click="handleBtnClick">提交</button>
+    </div>
+    <ul>
+        <todo-item v-bind:content="item"
+                   v-bind:index="index"
+                   v-for="(item,index) in list"
+                   @delete="DeleteItem">
+
+        </todo-item>
+    </ul>
+</div>
+
+<script>
+
+    var TodoItem = {
+        props: ['content' ,"index"],
+        template: "<li @click='Clickde'>{{content}}</li>",
+        methods:{
+            Clickde:function () {
+                this.$emit("delete",this.index);
+            }
+        }
+    }
+
+    var app = new Vue({
+        el: "#root",
+        components: {
+            TodoItem: TodoItem
+        },
+        data: {
+            todoValue: "",
+            list: []
+        },
+        methods: {
+            handleBtnClick: function() {
+                this.list.push(this.todoValue);
+                this.todoValue = ""
+            },
+            DeleteItem:function (index) {
+                this.list.splice(index,1);
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+        <!--自定义组件绑定原生事件方法：
+        意思是直接绑定组件上原生的事件，而不是原生事件触发后，通过this.$emit传递给父组件
+        1、给子组件内的元素绑定原生事件，并通过 this.$emit() 向外触发自定义事件，让父组件监听。
+        2、自定义组件在监听原生事件时直接加 .native 修饰符即可。
+
+        自定义事件：组件上的为自定义事件   原生事件：组件模板上的事件
+        注意@Beclick 会自动的被转换成 小写 beclick ,但this.$emit()中必须写beclick-->
+
+
+        <div id="app">
+            <child :content="'hello world'"
+
+                   @click.native="handleClick" >
+            </child>
+        </div>
+
+
+        <script>
+            Vue.component('child',{
+                props:['content'],
+//                template:'<div @click="firstClick"> {{content}}</div> ',
+                template:'<div > {{content}}</div>',
+                methods:{
+                    firstClick:function () {
+                        alert("first Click");
+//                        this.$emit('beclick')
+                    }
+                }
+            })
+            var vm  = new Vue({
+                el:"#app",
+                methods:{
+                    handleClick:function () {
+                        alert("父组件");
+                    }
+                }
+            })
+        </script>
+
+</body>
+</html>

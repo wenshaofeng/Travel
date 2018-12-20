@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+        <!--加冒号传递的是js表达式，数字依然是数字类型，不加冒号是字符串，数字会被转化成字符串-->
+        <!--如果父组件定义 content="" 属性，引号里表示的是一个字符串；只有 :content="" 的形式，
+        :content = " 'abc '"  (传字符串)
+        引号里才表示一个 js 表达式。
+        参数校验：
+        属性名: {
+        type: [数据类型1, 数据类型2] 或 单独的数据类型
+        required: Boolean, // 是否必传  true (没传值控制台报警告) false （没传也没事）
+        default: 'default value', //默认值  (没传过来默认的值)
+        validator : function(val ) {  //自定义校验
+        return (条件)
+        }    val的值为content传入的值
+        }-->
+
+        <!--props 特性：父组件向子组件传递一个属性，子组件通过 props 声明了相应属性进行接收，
+        在 DOM 中不会显示该属性。
+
+        非props特性：父组件传值，子组件不接
+        1、子组件中是无法使用父组件传递过来的值
+        2、在 DOM 中会显示该属性和对应的属性值-->
+
+        <div id="app">
+            <child :content="'hello world'"> </child>
+        </div>
+
+
+        <script>
+            Vue.component('child',{
+//                props: {
+//                    content: {
+//                        type:String,
+////                        required:true,
+//                        default: "halo baby",
+//                        validator:function (val) {
+//                            return (val.length>25)
+//                        }
+//                    }
+//                },
+                template:'<div> {{content}}</div> '
+            })
+            var vm  = new Vue({
+                el:"#app",
+
+            })
+        </script>
+</body>
+</html>

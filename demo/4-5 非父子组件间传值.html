@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子组件间的传值(Bus/总线/发布订阅模式/观察者模式)</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+            <!--非父子组件传值：
+            1、Vue.prototype.bus = new Vue()
+                在Vue的原型中添加bus属性后，后面每个Vue实例都能继承bus属性，
+                就是通过bus属性（类似总线），把一个组件上的事件触发让其余组件接收并
+                响应，即所谓的发布-订阅模式
+                所有的组件都是Vue产生的，把bus绑在Vue上，
+                以后所有的组件都可以通过它们老祖宗身上的bus相互传递数据了.。
+                再好比是bus是全局变量，组件是作用域， 作用域中是可以获取全局变量的值的。
+            2、在发送组件里：this.bus.$emit("事件名",value)
+            3、在接收组件里：this.bus.$on("事件名",value)-->
+
+<!--            保存this：因为this的作用域发生了变化，
+            this.bus.$on('change', callback)这句代码改变了this指向，
+            this的绑定主要有四种情况：默认、隐式、显式、new。
+            而这种情况是this.bus调用了callback函数，对象调用方法属于隐式绑定，
+            按照隐式绑定的规则，callback中this的指向调用它的对象，即this.bus这个vue实例。
+            尝试输出两个this，你可以发现其实这两个this都指向Vue实例，但是又是不同的Vue实例。
+            callback中的this指向原来this指向的Vue实例中的bus属性，而bus属性又是一个Vue实例，
+            所以会导致这种现象。
+            为了避免this指向混乱，可以使用es6中的箭头函数
+            this.bus.$on('change',(msg) => {})-->
+        <div id="app">
+            <child content="Dell"> </child>
+            <br>
+
+            <child content="Lee"> </child>
+        </div>
+
+        <script>
+            Vue.prototype.bus = new Vue();  //后面每个Vue实例都能继承bus属性
+
+            Vue.component('child',{
+                    template:'<div @click="handClick"> {{selfCon}} </div>',
+                    data:function () {
+                      return {
+                          selfCon:this.content
+                      }
+                    },
+                    props:{
+                        content:{
+                            type: String
+                        }
+                    },
+                    methods:{
+                        handClick: function () {
+                            this.bus.$emit('change',this.selfCon);
+                        }
+                    },
+                    mounted:function () {
+                        var this_=this;
+                        this.bus.$on('change',function (msg) {
+                            this_.selfCon = msg;
+
+                        })
+                    }
+            })
+            var vm = new Vue({
+                el:"#app",
+            })
+
+        </script>
+</body>
+</html>

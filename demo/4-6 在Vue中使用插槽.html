@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!--插槽： 作用：希望子组件内展示父组件内传递来的dom
+        solt：在子组件内直接放dom，在组件的tempalte中用<slot></slot>来代替这个dom使用
+        可以在slot中定义默认值<slot>default content</slot>
+        具名插槽：slot=""取名 slot里 name=“”取名
+        通过props传值时，v-html必须包裹div （template没用）-->
+
+作用域插槽：
+
+        <div id="root">
+            <child>
+            <h1 slot = "header"> heading</h1>
+            <h1 slot = "footer"> foot</h1>
+            </child>
+        </div>
+
+        <script>
+            Vue.component('child',{
+               template: `<div>
+                            <slot name = "header"> 默认内容</slot>
+                            <div class="content"> hello world</div>
+                           <slot name = "footer"> 默认内容</slot>
+                            </div> `,
+
+
+            });
+
+            var vm = new Vue({
+                el:"#root",
+
+            })
+
+     </script>
+
+        <!--4-7 作用域插槽
+        作用域插槽在父组件中用<template> </template>包裹，同时定义slot-scope='props'属性
+        接收子组件传递过来的值，一般用于子组件循环获取父组件的DOM元素-->
+       <!-- <div id="root">
+            <child>
+                <template slot-scope="pr">
+                    <li>{{pr.it}}</li>
+                </template>
+            </child>
+        </div>
+
+        <script>
+            Vue.component('child',{
+               data:function () {
+                   return{
+                       list:[4 , 5 , 9 ,10]
+                   }
+               },
+                template:`<div>
+                                <ul>
+                                      <slot v-for ="item of list"
+                                            :it=item
+                                      >
+                                      </slot>
+                                 </ul>
+                            </div> `
+            })
+            var vm = new Vue({
+                el:"#root",
+
+            })
+        </script>
+-->
+</body>
+</html>

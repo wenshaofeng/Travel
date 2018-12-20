@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件与v-once指令</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+       <!-- 动态组件<component :is="type"> </component>  用is绑定了data数据，
+        从而动态的切换组件，注意data数据是子组件的名称
+        v-once:将组件放在内存中，对于静态内容来说，提高了效率-->
+        <div id="root">
+            <component :is='type'> </component>
+          <!--  <child_one v-if="type==='a'"> </child_one>
+            <child_two v-if="type==='b'"> </child_two>-->
+            <button @click="handleClick">change</button>
+        </div>
+
+        <script>
+            Vue.component("child_one",{
+                template:'<div v-once> child_one </div>'
+            });
+            Vue.component("child_two",{
+                template:'<div v-once> child_two </div>'
+            });
+            var vm = new Vue({
+                el:"#root",
+                data:{
+                    //一
+//                    type:'a'
+                    //二
+                    type:'child_one'
+                },
+                methods:{
+                    handleClick:function () {
+                      // 一：v-if中 a 是条件
+                       /* this.type = this.type === 'a'? 'b':'a'*/
+                        // 二:动态组件中，type为子组件名称
+                        this.type = this.type === 'child_one'? 'child_two':'child_one'
+                    }
+                }
+            })
+        </script>
+
+
+</body>
+</html>

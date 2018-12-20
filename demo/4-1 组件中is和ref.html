@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+           <!-- 1、is属性：解决标签规范造成的bug（如table、ul、select内）
+            2、非根组件中data必须是函数，
+            返回一个对象（为了保证每一个子组件数据的唯一性，避免多个子组件数据共享）
+            3、操作dom：通过在标签上加ref属性，可通过this.$refs.xxx取得该dom节点，
+                如果是在组件上添加了ref属性，则取得的是该组件的引用-->
+
+        <div id="app">
+                <counter @increase="handleTotal" ref="one1" ></counter>
+                <counter @increase="handleTotal" ref="two2"></counter>
+                {{ total }}
+        </div>
+
+        <script>
+            Vue.component('counter',{
+                template : ' <div><button @click = "addone"> 加一</button>    {{ number}}</div>',
+                  data:function () {
+                    return{
+                        number:0
+                    }
+                },
+                methods:{
+                    addone:function () {
+                        this.number ++;
+                        this.$emit("increase");
+                    }
+                }
+            })
+
+            var vm =new Vue({
+                el:"#app",
+                data:{
+                    total : 0
+                },
+                methods:{
+                    handleTotal:function () {
+                        this.total =  this.$refs.one1.number + this.$refs.two2.number
+                    }
+                }
+               /* methods:{
+                    handleClick:function () {
+                       console.log(this.$refs.hello.innerHTML)
+                    }
+                }*/
+            })
+        </script>
+</body>
+</html>

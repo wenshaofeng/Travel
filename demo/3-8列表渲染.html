@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+        <!--列表渲染的时候，推荐在 每一个 item 绑定一个 key 值，
+        使用 index,比较消耗性能， 推荐使用:key后端返回中数据 id 等可以作为
+        唯一标示的字段 <li v-for='(item,index) of arrdata ' :key='item._id'></li>
+        通过改变 数据对 页面渲染的两个方式：
+        ****不能通过 arr[index] 修改数据，进行视图渲染，****
+        有三种方式实现可以数据变化页面也变化
+        1、直接改变数组或对象的引用；
+        2、使用数组的变异方法；（针对数组）
+        3、使用Vue.set()或 vm.$set()方法； Vue.set(obj, key, value)
+                                             vue.$set(obj, key, value)
+
+        vue 提供一个 set 方法，向一个对象中添加数据，当数据改变时，页面也会随之变化。-->
+
+        <!--1:   vm.userInfo=[ {
+        id:"0102",
+        text:"helloa"
+
+        }, {
+        id:"0103",
+        text:"LI"
+        }, {
+        id:"0104",
+        text:"Wen"
+        }
+        ]-->
+
+
+
+
+
+        <div id="app">
+
+            <div v-for="(item, index) of userInfo"
+                  :key="item.id"  >
+                {{item.text}}------------{{index}}
+            </div>
+        </div>
+
+
+        <script>
+
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    /*userInfo: {
+                        name: "Dell",
+                        age: 28,
+                        gender: "male",
+                        salary: "secret"
+                    }*/
+                    userInfo:[
+                        {
+                            id:"0102",
+                            text:"hello"
+
+                        }, {
+                            id:"0103",
+                            text:"LI"
+                        }, {
+                            id:"0104",
+                            text:"Wen"
+                        }
+                    ]
+
+
+                }
+            })
+        </script>
+</body>
+</html>

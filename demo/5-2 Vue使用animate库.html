@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中CSS动画效果</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="./animate.css">
+    <style>
+       /* @keyframes bounce_in{
+            from {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(2);
+            }
+            to{
+                transform: scale(1);
+            }
+        }
+        .enter{
+            transform-origin: left center;
+            animation: bounce_in 1s;
+        }
+        .leave{
+            transform-origin: left center;
+            animation: bounce_in 1s reverse;
+        }*/
+
+    </style>
+</head>
+<body>
+        <!--animate.css 库
+        使用自定义的 类名，将 transition 标签中，添加，enter-active-class 属性，
+        值为自定义的名字，
+        使用 animation库 填写 ‘animated xxx’
+        进入时设 enter-active-class = ''
+        离开时设 leave-active-class = ''-->
+
+<div id="root">
+    <transition
+            name="fa"
+            enter-active-class="animated swing"
+            leave-active-class="animated hinge"
+    >
+        <div v-if="show">hello world </div>
+    </transition>
+
+    <button @click="handleClick">{{change}}</button>
+</div>
+
+<script>
+
+    var vm = new Vue({
+        el:"#root",
+        data:{
+            show:true,
+            change:"隐藏"
+        },
+        methods:{
+            handleClick:function () {
+                this.show = !this.show;
+                this.change =  this.change ==="隐藏" ?"显示":"隐藏"
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

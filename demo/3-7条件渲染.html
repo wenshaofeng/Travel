@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的条件渲染</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+       <!-- 1: v-if和v-show的不同之处，就是v-show只是将dom元素用了display隐藏显示起来了，
+        而v-if则是通过判定是佛满足属性需求确定挂不挂在dom元素，性能上v-show是比v-if高的，
+        但是v-if有v-else-if和v-else可以用，可用性高些；
+        2:关乎于input中的例子，当元素改变时候，vue会尝试去复用已经存在的dom,
+        而这样就可能会导致一些小bug,比如一个文本框的值在另一个还是会被复用
+        ，这时候就加上一个key值，问题就能解决。由此后续需要深入理解vue中的虚拟dom机制。-->
+
+    <div id="app">
+        <div v-if="show==='a'"> 用户名 <input type="text"  key="useer"></div>
+        <div v-else> 邮箱 <input type="text" key="email"></div>
+        <button @click="toggle">更改</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                show:"a"
+            },
+            methods:{
+                toggle:function () {
+                    this.show = this.show=== "a"? "":"a"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

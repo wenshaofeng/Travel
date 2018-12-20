@@ -19,10 +19,11 @@
 -  引入fastclick库
 - 配置使用iconfont
 - 自定义目录
-####第一步 配置meta标签
+#### 第一步 配置meta标签
 index.html里加个 meta 标签:
 <meta name="viewport"content="width=device-width,initial-scale=1.0,
     minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
 ![](https://upload-images.jianshu.io/upload_images/9249356-38c5d57cedaf57a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
@@ -45,7 +46,7 @@ user-scalable=no ： 表示用户是否可以调整缩放比例
 
 这是一个初始化的代码，其中一些初始化配置可以自行根据需求修改。
 
-###第三步 解决1像素边框方案
+### 第三步 解决1像素边框方案
 在移动端页面开发，常常有个 1像素边框 的问题。
 也就是有的手机屏幕分辨率比较高，如果我们在页面上写border-bottom啥的样式，会导致这些手机屏幕分辨率高的当中，1px边框显示成2px边框或3px边框等显示成多像素。
 为了解决这个1像素边框问题，我们就引入了 border.css
@@ -57,7 +58,7 @@ user-scalable=no ： 表示用户是否可以调整缩放比例
 比如要给一个元素加上一像素的下边框，就直接加个类名：`<div class="border-bottom>"`就行了。
 要给一个元素加上一像素的上边框和下边框，就直接加类名：`<div class="border-topbottom">`就行了。
 
-###第四步 引入fastclick库
+### 第四步 引入fastclick库
 在移动端开发中，某些机型、某些浏览器上，click点击事件要延迟300ms执行。
 要解决这个问题，我们引入个fastclick库
 `npm install fastclick --save`

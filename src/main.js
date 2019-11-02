@@ -10,18 +10,25 @@ import 'styles/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import store from './store/index.js'
+import { setTitle } from '@/util/util.js'
 
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
+
+router.beforeEach((to, from, next) => {
+  to.meta && setTitle(to.meta.title)
+  next()
+})
 /* eslint-disable no-new */
-new Vue({
+ new Vue({
   el: '#app',
   router,
   store,
   components: { App }, // 相当于 {App（局部组件）:App} ES6写法
   template: '<App/>'
 })
+
 
 // 路由就是根据网址的不同，
 // 返回不同的内容给用户

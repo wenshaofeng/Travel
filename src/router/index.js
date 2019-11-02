@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home'
-import City from '@/pages/city/City'
-import Detail from '@/pages/detail/Detail'
 
 Vue.use(Router)
 
@@ -11,20 +9,30 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        title: "首页"
+      }
     },
     {
-      path:'/city',
-      name :'City',
-      component: City
-    }  ,{
-      path:'/detail/:id',
-      name :'Detail',
-      component: Detail
+      path: '/city',
+      name: 'City',
+      component: () => import('@/pages/city/City'),
+      meta: {
+        title: "城市列表"
+      }
+    },
+    {
+      path: '/detail/:id',
+      name: 'Detail',
+      component: () => import('@/pages/detail/Detail'),
+      meta: {
+        title: "详情页"
+      }
     }
 
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
 })

@@ -38,7 +38,10 @@
         updated () {
             this.startY = this.$refs['A'][0].offsetTop
         },
-
+       mounted(){
+          console.log("渲染了子组件1");
+           
+      },
       methods:{
         handleLetterClick: function (e) {
           this.$emit("change",e.target.innerText);

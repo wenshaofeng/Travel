@@ -46,7 +46,10 @@
             this.letter = mes
         }
       },
+
       mounted(){
+          console.log("渲染了父组件");
+
           this.getCityInfo() //页面挂载好了以后执行
       }
     }
@@ -54,6 +57,4 @@
 
 </script>
 
-<style lang='stylus' scoped>
 
-</style>

@@ -1,3 +1,3 @@
 export const setTitle = (title) => {
-  window.document.title = title || 'adminssaddasdasdsadas'
+  window.document.title = title || 'adminssasdadasddasdasdsadas'
 }

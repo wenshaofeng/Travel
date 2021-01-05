@@ -14,7 +14,7 @@
     "versions": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "better-scroll": "^1.13.2",
     "fastclick": "^1.0.6",
     "stylus": "^0.54.5",
